@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Freshpro Market – Weekly Pre-Order</title>
+<meta name="description" content="Fresh fruit, veg, frozen fruit, nuts and more. Pre-order on Freshpro Market's weekly order book.">
+<style>
+:root{--green:#2f7d4f;--dark:#1d3b2a;--cream:#fbf8f1;--peach:#ffe9d6;--berry:#8a3b5e;--line:#e6e0d2;--ink:#243127}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5;padding-bottom:84px}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;color:var(--dark);margin:0}
+.strip{height:54px;background:url(top.jpg) center/cover}
+.strip.b{background-image:url(bottom.jpg)}
+header{text-align:center;padding:28px 18px 10px;max-width:760px;margin:auto}
+header img{width:min(320px,80%);height:auto;border-radius:12px}
+header h1{font-size:clamp(1.7rem,6vw,2.5rem);margin-top:14px}
+header p{margin:8px 0 0;color:#566;font-size:1.02rem}
+.cta{display:inline-block;margin-top:16px;background:var(--green);color:#fff;text-decoration:none;padding:12px 24px;border-radius:999px;font-weight:600}
+main{max-width:900px;margin:auto;padding:0 16px}
+section{margin:30px 0}
+.how{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;box-shadow:0 2px 14px #0000000a}
+.how h2{margin-bottom:10px}
+.how p{margin:.55em 0}
+.how .imp{background:var(--peach);border-radius:12px;padding:10px 14px}
+.how .cap{font-weight:600;color:var(--berry)}
+/* ===== CONFIG-DRIVEN INFO ===== */
+.info{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:640px){.info{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.card h3{font-size:1.15rem;margin-bottom:8px}
+.card ul{margin:0;padding-left:1.1em}
+.slot{background:#fff3b8;border:1px dashed #c9a400;border-radius:6px;padding:1px 6px;font-weight:600}
+.cat{margin-top:34px}
+.cat h2{font-size:1.5rem;display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--green);padding-bottom:6px}
+.cat .sub{font-size:.85rem;color:var(--berry);font-family:Inter,sans-serif;font-weight:500}
+.cat.special h2{border-color:var(--berry)}
+.cat.special .items{border:2px solid #d9a0b5;border-radius:14px;background:#fff7fa}
+.items{margin-top:6px}
+.item{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item .n{font-weight:600}
+.item .n em{font-style:normal;font-weight:500;font-size:.78rem;color:var(--berry);margin-left:4px}
+.item .u{grid-column:1;color:#6b7a6f;font-size:.9rem}
+.item .u b{color:var(--dark)}
+.qty{grid-column:2;grid-row:1/3;display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+.qty button{width:38px;height:38px;border:0;background:#f1ede2;font-size:1.25rem;cursor:pointer;color:var(--dark)}
+.qty button:active{background:var(--green);color:#fff}
+.qty span{min-width:30px;text-align:center;font-weight:700}
+.item.on{background:#f1f8f3}
+form{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+label{display:block;font-weight:600;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cfc8b6;border-radius:10px;font:inherit;background:#fff}
+.sum{margin-top:12px;font-size:.95rem}
+.sum div{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dotted var(--line)}
+.send{width:100%;margin-top:16px;background:#25a244;color:#fff;border:0;border-radius:999px;padding:15px;font-size:1.05rem;font-weight:700;cursor:pointer}
+.send:disabled{background:#aab5ad;cursor:not-allowed}
+.note{font-size:.82rem;color:#6b7a6f;margin-top:8px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--dark);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.bar a{background:#fff;color:var(--dark);text-decoration:none;padding:9px 18px;border-radius:999px;font-weight:700}
+.bar strong{font-size:1.15rem}
+footer{text-align:center;color:#778;font-size:.82rem;padding:20px}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+ CONFIG  –  EDIT ONLY THIS BLOCK. Everything marked "FILL IN" is a placeholder.
+     ===================================================================== -->
+<script>
+const CONFIG = {
+  shopName: "Freshpro Market",
+  // WhatsApp number in international format, digits only, no + or spaces (e.g. 27XXXXXXXXX). FILL IN
+  whatsappNumber: "27636463938",
+  // Delivery details – FILL IN (set to [] to hide the card)
+  delivery: [],
+  // Collection points – FILL IN (set to [] to hide the card)
+  collection: []
+};
+</script>
+<!-- ===================================================================== -->
+
+<div class="strip"></div>
+<header>
+  <img src="logo.jpg" alt="Freshpro Market">
+  <h1>Weekly Pre-Order</h1>
+  <p>Fresh fruit &amp; veg, frozen fruit, nuts, dried fruit and more. Pick your favourites and send your order straight to us on WhatsApp.</p>
+  <a class="cta" href="#order">Start your order</a>
+</header>
+
+<main>
+<section class="how" id="how">
+<h2>📋 HOW TO ORDER</h2>
+<p>✅ We work on a PRE-ORDER BASIS.<br>
+✅ Payment is made upon collection.<br>
+✅ Pay conveniently using our Yoco or Capitec card machines.</p>
+<p>📲 Simply WhatsApp us your order. Our team will process it and send you your ORDER NUMBER.</p>
+<p class="imp">⚠️ <b>IMPORTANT:</b> NO ORDER NUMBER = NO CONFIRMED ORDER.<br>
+When we're busy, please make sure you've received your order number before we close the order book. This is your confirmation that your order has been recorded and your stock allocated.</p>
+<p class="imp">⚠️ <b>IMPORTANT:</b> Order Book Closes Thursday night. Some orders are accepted on Friday morning/afternoon, but we can close it at any time if we become fully booked. So place your order ASAP</p>
+<p class="imp">⚠️ <b>IMPORTANT:</b> You can place your own order on our Google Form website. The link is in the Bio of our WhatsApp (I can't share the link, but it's the Neartail link under Website on our profile) ~ (it doesn't collect payments, only captures orders)</p>
+<p class="cap">❤️ We'd hate for you to miss out on your favourites!<br>🛒 CAN WE PENCIL IN AN ORDER FOR YOU THIS WEEK?</p>
+</section>
+
+<section class="info" id="info"></section>
+
+<section id="order">
+<h2 style="font-size:1.8rem">Choose your items</h2>
+<div id="menu"></div>
+</section>
+
+<section>
+<form id="f" onsubmit="return false">
+<h2>Your order</h2>
+<div class="sum" id="sum"><div style="color:#778">Nothing selected yet.</div></div>
+<label for="nm">Your name</label>
+<input id="nm" autocomplete="name" placeholder="Full name">
+<label for="ph">Your phone number</label>
+<input id="ph" type="tel" autocomplete="tel" placeholder="e.g. 082 123 4567">
+<label for="mt">Collection or delivery?</label>
+<select id="mt"><option>Collection</option><option>Delivery</option></select>
+<label for="cm">Notes (optional)</label>
+<textarea id="cm" rows="2" placeholder="Anything we should know?"></textarea>
+<button class="send" id="go" disabled>Send order on WhatsApp</button>
+<p class="note">This opens WhatsApp with your order pre-written. Your order is only confirmed once we reply with your ORDER NUMBER. Payment is made on collection.</p>
+</form>
+</section>
+</main>
+
+<div class="strip b"></div>
+<footer>© Freshpro Market · Prices as per the current weekly price list</footer>
+
+<div class="bar"><span>Total <strong id="tot">R0.00</strong> · <span id="cnt">0</span> items</span><a href="#f">Review &amp; send</a></div>
+
+<script>
+// Price list: [name, unit, price, note]
+const MENU = [
+ {t:"🍬 Sweets", i:[["Wine Gums","500g",105],["Jelly Babies","500g",95],["Jelly Beans","500g",100],["Fruit Pastilles","500g",90],["Speckled Eggs","500g",120]]},
+ {t:"🫐 Fresh Fruits – Special / Season Ending Soon", sp:1, i:[["Blueberries Export","125g",20],["Blueberries Export","2kg",250],["Blueberries Export","500g",80],["Blueberries Candy","2kg",160],["Blueberries Candy","500g",50],["Blueberries B Grade","2kg",130],["Blueberries B Grade","1kg",65]]},
+ {t:"🍑 Fresh Fruits", i:[["Litchi","500g",60,"New"],["Plums","500g",35,"New"],["Apricots","500g",35,"New"],["Peaches","500g",35],["Nectarines","500g",35],["Cherries","+-125g",30],["Cherries","500g",80],["Cherries","2kg",300],["Strawberries","+-250gr",30,"Sweet With Stems"],["Kiwi","+-500g",80],["Apple Golden Del","1kg",25],["Apple Granny Smith","+-1kg",20],["Apple Red Fuji","+-1kg",20],["Pears","+-1kg",20],["Banana","+-1kg",20],["Pineapple","ea",20],["Sweet Melon","1pc",20],["Lemons","+-1kg",20],["Grapefruit","+-1.5kg",30],["Oranges","+-3kg",30],["Oranges","+-1kg",15],["White Grape","500g",50],["Red Grapes","500g",50],["Avocado's","+-1.5kg",50]]},
+ {t:"🥕 Fresh Veg", i:[["Potatoes","+-1kg",15],["Onions","+-1kg",20],["Red Onion","+-1kg",50],["Cucumber","1pc",25],["Lettuce","1pc",20],["Red Pepper","2pc",20],["Yellow Pepper","2pc",20],["Green Pepper","2pc",15],["Gem Squash","2pc",15],["Tomato","+-1kg",20],["Sweet Corn","3pc",35],["Butternut","1pc",10],["Sweet Potato","1.5kg",20],["Ginger","200gr",30],["Garlic","200gr",30],["Butternut","1pc",10],["Green Beans","1kg",20],["Green Chilli","500gr",40],["Red Chilli","500gr",40]]},
+ {t:"❄️ Frozen Fruit", i:[["Blueberries","10kg",500,"Bulk Special Limited"],["Blueberries","1kg",95],["Strawberries","1kg",80],["Raspberries","1kg",135],["Blackberries","1kg",135],["Pineberries","1kg",80,"White Strawberries"],["Mixed Berries","1kg",115],["Tropical Mix","1kg",105],["Sliced Banana","1kg",100],["Pineapple","1kg",100],["Figs","1kg",145],["Mango","1kg",140],["Kiwi","2kg",100,"Limited Availability"],["Kale","1kg",110],["Spinach","1kg",110],["Cherries","1kg",150,"Depleted"]]},
+ {t:"🍯 Other", i:[["Pure Raw Honey","500g",100],["Honey Comb","+-250g",80],["Eggs Large (6pc)","Tray",25],["Macadamia Oil","1Lt",80],["Macadamia Oil","5Lt",390],["Macadamia Butter","750g",140,"Chunky"],["Macadamia Butter","750g",140,"Smooth"],["Frozen Lollies Tropical","10x100g",45],["Frozen Lollies Litchi","10x100g",45],["Frozen Lollies Mango","10x100g",45]]},
+ {t:"🥜 Nuts", sub:"Raw or Roasted & Salted", i:[["Mixed Nuts Raw","500g",150],["Mixed Nuts Salt","500g",150],["Cashew salted","500g",165],["Cashew raw","500g",160],["Cashew peri peri","500g",165],["Pistachio Salt","500g",195],["Almonds Raw","500g",140],["Almond Salted","500g",140],["Walnuts","500g",130],["Roasted Corn Chut","500g",75],["Macadamia","1kg",150,"Roasted & Salted"],["Macadamia","1kg",150,"Raw Plain"],["Macadamia","1kg",150,"Roasted Plain"],["Pecan","500g",100]]},
+ {t:"🥭 Dried Fruit", i:[["Dried Mango","500g",130,"Strips"],["Ginger","500g",130],["Pear","500g",130],["Peeled Peach","500g",130],["Apple Wedges","500g",135],["Guava Strips","500g",130],["Banana Chips","500g",80]]},
+ {t:"🍽️ Frozen Meals", sub:"Serves 4", i:[["Beef Lasagna","+-1.2kg",195],["Chicken a la king","+-1kg",195]]}
+];
+const R=v=>"R"+v.toFixed(2);
+const q={};
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+// info cards
+(function(){
+  const ph=a=>a.map(x=>"<li>"+(/^FILL IN/.test(x)?'<span class="slot">'+esc(x)+'</span>':esc(x))+"</li>").join("");
+  let h="";
+  if(CONFIG.delivery.length) h+='<div class="card"><h3>🚚 Delivery</h3><ul>'+ph(CONFIG.delivery)+'</ul></div>';
+  if(CONFIG.collection.length) h+='<div class="card"><h3>📍 Collection points</h3><ul>'+ph(CONFIG.collection)+'</ul></div>';
+  document.getElementById("info").innerHTML=h;
+})();
+
+// menu
+let h="";
+MENU.forEach((c,ci)=>{
+  h+='<div class="cat'+(c.sp?' special':'')+'"><h2>'+c.t+(c.sub?' <span class="sub">'+esc(c.sub)+'</span>':'')+'</h2><div class="items">';
+  c.i.forEach((it,ii)=>{
+    const id=ci+"-"+ii;
+    h+='<div class="item" id="r'+id+'"><div class="n">'+esc(it[0])+(it[3]?'<em>'+esc(it[3])+'</em>':'')+'</div><div class="u">'+esc(it[1])+' · <b>'+R(it[2])+'</b></div>'+
+    '<div class="qty"><button type="button" aria-label="Remove one" onclick="chg(\''+id+'\',-1)">−</button><span id="q'+id+'">0</span><button type="button" aria-label="Add one" onclick="chg(\''+id+'\',1)">+</button></div></div>';
+  });
+  h+='</div></div>';
+});
+document.getElementById("menu").innerHTML=h;
+
+function chg(id,d){
+  q[id]=Math.max(0,Math.min(99,(q[id]||0)+d));
+  document.getElementById("q"+id).textContent=q[id];
+  document.getElementById("r"+id).classList.toggle("on",q[id]>0);
+  render();
+}
+function lines(){
+  const L=[];
+  MENU.forEach((c,ci)=>c.i.forEach((it,ii)=>{
+    const n=q[ci+"-"+ii]||0;
+    if(n) L.push({n,it,sub:n*it[2]});
+  }));
+  return L;
+}
+const lbl=it=>it[0]+(it[3]&&!/^(New|Bulk|Limited|Depleted)/.test(it[3])?" ("+it[3]+")":"")+" "+it[1];
+function render(){
+  const L=lines(),total=L.reduce((a,x)=>a+x.sub,0),cnt=L.reduce((a,x)=>a+x.n,0);
+  document.getElementById("tot").textContent=R(total);
+  document.getElementById("cnt").textContent=cnt;
+  document.getElementById("sum").innerHTML=L.length?L.map(x=>"<div><span>"+x.n+" × "+esc(lbl(x.it))+"</span><span>"+R(x.sub)+"</span></div>").join("")+'<div style="font-weight:700;border:0"><span>Total</span><span>'+R(total)+"</span></div>":'<div style="color:#778">Nothing selected yet.</div>';
+  check();
+}
+function check(){
+  const ok=lines().length&&document.getElementById("nm").value.trim()&&document.getElementById("ph").value.trim().length>=9;
+  document.getElementById("go").disabled=!ok;
+}
+["nm","ph"].forEach(i=>document.getElementById(i).addEventListener("input",check));
+document.getElementById("go").onclick=function(){
+  const L=lines(),total=L.reduce((a,x)=>a+x.sub,0);
+  let m="*NEW PRE-ORDER – "+CONFIG.shopName+"*\n\n";
+  m+="Name: "+document.getElementById("nm").value.trim()+"\nPhone: "+document.getElementById("ph").value.trim()+"\n"+document.getElementById("mt").value+"\n\n*Items*\n";
+  m+=L.map(x=>"• "+x.n+" × "+lbl(x.it)+" – "+R(x.sub)).join("\n");
+  m+="\n\n*Total: "+R(total)+"*";
+  const c=document.getElementById("cm").value.trim();
+  if(c) m+="\n\nNotes: "+c;
+  m+="\n\nPlease send my ORDER NUMBER. Payment on collection.";
+  window.open("https://wa.me/"+CONFIG.whatsappNumber+"?text="+encodeURIComponent(m),"_blank");
+};
+</script>
+</body>
+</html>
