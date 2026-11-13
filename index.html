@@ -140,6 +140,9 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 .co label{display:block;font-size:.85rem;font-weight:600;margin:12px 0 5px}
 .co input,.co textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;background:var(--cream)}
 .co input:focus,.co textarea:focus{outline:2px solid var(--leaf);border-color:transparent}
+.rts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rt{border:1px solid var(--line);background:var(--cream);border-radius:12px;padding:10px 12px;text-align:left;border-left:6px solid var(--c)}.rt b{display:block;font-size:.95rem}.rt span{font-size:.8rem;color:var(--mute)}.rt.on{background:var(--c);color:#fff}.rt.on span{color:#fff}
+.stops{display:grid;gap:8px;margin-top:10px}.stop{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px}.stop .tm{flex:none;min-width:62px;text-align:center;background:var(--cream);border-radius:8px;padding:6px 4px;font-weight:700;color:var(--g)}.stop .pl{flex:1;min-width:0}.stop .pl b{display:block}.stop .pl small{color:var(--mute);font-size:.8rem}.stop.on{border-color:var(--g);box-shadow:0 0 0 2px var(--g)}.stop.on .tm{background:var(--g);color:#fff}
+.pick{margin-top:12px;background:#e5f2e1;border-radius:12px;padding:12px 14px;font-size:.92rem;color:var(--g)}.pick:empty{display:none}.nof{color:var(--mute);font-size:.9rem;margin:10px 0 0}
 .seg{display:flex;gap:8px}.seg label{flex:1;margin:0;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-weight:500}
 .seg input{display:none}.seg label:has(input:checked){background:var(--g);border-color:var(--g);color:#fff}
 .err{color:var(--warn);font-weight:600;font-size:.9rem;min-height:1.2em;margin-top:10px}
@@ -209,7 +212,7 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
   <div class="sec-h"><div class="eyebrow">How to order</div><h2>Four simple steps</h2></div>
   <div class="steps">
    <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-list"/></svg></div><h3>1. Pick your fruit</h3><p>Choose your items, sizes and quantities. Fruit that is in season is highlighted as you shop.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-pin"/></svg></div><h3>2. Pick your location</h3><p>Choose collection or delivery for your order.</p></div>
+   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-pin"/></svg></div><h3>2. Pick your location</h3><p>Pick a collection route, then the stop and time closest to you.</p></div>
    <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-wa"/></svg></div><h3>3. Confirm on WhatsApp</h3><p>Tap Order on WhatsApp with your order pre-written, then wait for your confirmation and ORDER NUMBER.</p></div>
    <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-hand"/></svg></div><h3>4. Collect and pay</h3><p>Click and collect your order and pay by card on our Yoco or Capitec machines.</p></div>
   </div>
@@ -285,7 +288,7 @@ function products(c){const m=new Map();c.i.forEach((it,k)=>{const id=c.id+"-"+k;
 
 let cart=JSON.parse(localStorage.getItem("fp-cart")||"{}");
 Object.keys(cart).forEach(k=>{if(!SKU[k]||isOut(SKU[k].note)||!(cart[k]>0))delete cart[k]});
-let form=JSON.parse(localStorage.getItem("fp-form")||'{"m":"Collection"}');
+let form=JSON.parse(localStorage.getItem("fp-form")||"{}");
 const pick={};let view="shop";
 
 /* category cards on the page */
@@ -324,6 +327,19 @@ function activeChip(){if(view!=="shop")return;const pc=$("pc"),ch=$("chips");if(
 function jump(id){const el=$("pc-"+id);if(el)$("pc").scrollTop=el.offsetTop-$("chips").offsetHeight}
 
 /* panel: cart view */
+const ROUTES=[
+{n:1,day:"Saturday",c:"#0b4fb3",st:[["Midrand","Kyalami","08:00"],["Fourways","Fourways High","10:00"],["Roodepoort","Allen Nek","12:00"],["Randburg","Greenside","14:00"],["Edenvale","Dunvegan","16:00"]]},
+{n:2,day:"Sunday",c:"#c9a400",st:[["Rivonia","Rivonia Primary","08:00"],["Bryanston","Bryanston Primary","09:00"],["Ferndale","Ferndale High","10:00"],["Cresta","Robin Hills Primary","11:00"],["Fairland","Cliffview Primary","12:00"],["Linden","Hoerskool Linden","13:00"],["Hyde Park","Hyde Park High","14:00"],["Parkmore","Montrose Primary","15:00"],["Morningside","Lycee Jules Verne","16:00"]]},
+{n:3,day:"Saturday",c:"#e03a3a",st:[["Kempton Park","Van Riebeeck","08:00"],["Kempton Park","Nimrod Park","09:00"],["Edenvale","Edenglen","10:00"],["Bedfordview","Dawnview","11:00"],["Bedfordview","Kensington","12:00"],["Orange Grove","Linksfield","13:00"],["Highlands North","Norwood","14:00"],["Randpark Ridge","Randburg","15:30"],["Northriding","Cooper College","16:30"]]},
+{n:4,day:"Sunday",c:"#1f9d5c",st:[["Alberton","Brackendowns","08:00"],["Alberton","","09:00"],["Germiston","Afri Hoerskool Germ","10:00"],["Boksburg","Laerskool Baanbreker","11:00"],["Brakpan","Laerskool Morewag","12:00"],["Benoni","","13:00"],["Parktown","King Edward School","14:30"],["Glenhazel","Glenhazel Primary","15:30"],["Bramley","Bramly Primary","16:30"]]}];
+ROUTES.forEach(r=>r.st=r.st.map((x,i)=>({a:x[0],p:x[1],t:x[2],i,r})));
+function stopCard(x,sr){const on=form.r===x.r.n&&form.s===x.i;return'<button type="button" class="stop'+(on?" on":"")+'" data-r="'+x.r.n+'" data-s="'+x.i+'"><span class="tm">'+x.t+'</span><span class="pl"><b>'+esc(x.a)+'</b><small>'+(x.p?esc(x.p)+" · ":"")+(sr?"Route "+x.r.n+" · "+x.r.day:x.r.day)+'</small></span></button>'}
+function chosen(){const r=ROUTES.find(r=>r.n===form.r);return r&&r.st[form.s]?r.st[form.s]:null}
+function pickerHTML(){
+ const q=(form.q||"").trim().toLowerCase();let h="";
+ if(q){const m=ROUTES.flatMap(r=>r.st).filter(x=>(x.a+" "+x.p).toLowerCase().includes(q));h=m.length?'<div class="stops">'+m.map(x=>stopCard(x,1)).join("")+'</div>':'<p class="nof">No stop matches that. Try a nearby suburb or clear the search to browse by route.</p>'}
+ else{const r=ROUTES.find(r=>r.n===form.r);h='<div class="rts">'+ROUTES.map(x=>'<button type="button" class="rt'+(x===r?" on":"")+'" style="--c:'+x.c+'" data-route="'+x.n+'"><b>Route '+x.n+'</b><span>'+x.day+' · '+x.st[0].t+" to "+x.st[x.st.length-1].t+'</span></button>').join("")+'</div>'+(r?'<div class="stops">'+r.st.map(x=>stopCard(x)).join("")+'</div>':'<p class="nof">Choose a route to see its stops and times.</p>')}
+ const c=chosen();return h+'<div class="pick">'+(c?"Collecting at <b>"+esc(c.a)+(c.p?" ("+esc(c.p)+")":"")+"</b>, Route "+c.r.n+" "+c.r.day+" at <b>"+c.t+"</b>":"")+'</div>'}
 function lines(){return Object.entries(cart).filter(([k,v])=>v>0&&SKU[k]).map(([k,v])=>({k,n:v,s:SKU[k],sub:v*SKU[k].price}))}
 function totals(){const L=lines();return{L,total:L.reduce((a,x)=>a+x.sub,0),count:L.reduce((a,x)=>a+x.n,0)}}
 function drawCart(){setStep(2);
@@ -335,8 +351,7 @@ function drawCart(){setStep(2);
  h+='<form class="co" id="co" onsubmit="return false"><h3>Your details</h3>'+
  '<label for="nm">Full name</label><input id="nm" autocomplete="name" value="'+esc(form.nm||"")+'">'+
  '<label for="phn">Phone number</label><input id="phn" type="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" value="'+esc(form.ph||"")+'">'+
- '<label>Pick your location: collection or delivery</label><div class="seg"><label><input type="radio" name="m" value="Collection"'+(form.m!=="Delivery"?" checked":"")+'>Collection</label><label><input type="radio" name="m" value="Delivery"'+(form.m==="Delivery"?" checked":"")+'>Delivery</label></div>'+
- '<div id="addrWrap"'+(form.m==="Delivery"?"":" hidden")+'><label for="ad">Delivery address</label><textarea id="ad" rows="2" autocomplete="street-address">'+esc(form.ad||"")+'</textarea></div>'+
+ '<label for="q">Pick your location: find your suburb or school</label><input id="q" type="search" placeholder="Type your suburb or school, e.g. Fourways" autocomplete="off" value="'+esc(form.q||"")+'"><div id="pk">'+pickerHTML()+'</div>'+
  '<label for="cm">Notes (optional)</label><textarea id="cm" rows="2" placeholder="Anything we should know?">'+esc(form.cm||"")+'</textarea><div class="err" id="err"></div></form>';
  $("pc").innerHTML=h}
 function drawFoot(){
@@ -364,7 +379,8 @@ document.addEventListener("click",e=>{
  if(e.target.closest("#send"))send();
 });
 $("pc").addEventListener("change",e=>{if(!e.target.classList.contains("sel"))return;const key=e.target.closest(".item").dataset.key;pick[key]=e.target.value;redrawRow(key)});
-$("pc").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.name==="m"){form.m=f.value;$("addrWrap").hidden=f.value!=="Delivery"}else if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
+$("pc").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.id==="q"){form.q=f.value;$("pk").innerHTML=pickerHTML()}else if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
+$("pc").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b||!$("pk"))return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q=""; $("q").value=""}$("err").textContent="";localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML()});
 $("pc").addEventListener("scroll",()=>requestAnimationFrame(activeChip),{passive:true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel()});
 $("burger").onclick=()=>$("links").classList.toggle("open");
@@ -373,7 +389,7 @@ const nav=$("nav");const onScroll=()=>nav.classList.toggle("solid",scrollY>40||$
 
 function buildMessage(){
  const{L,total}=totals();
- let m="*NEW PRE-ORDER – "+SHOP.name+"*\n\nName: "+form.nm.trim()+"\nPhone: "+form.ph.trim()+"\n"+(form.m==="Delivery"?"Delivery to: "+(form.ad||"").trim():"Collection")+"\n\n*Items*\n";
+ let m="*NEW PRE-ORDER – "+SHOP.name+"*\n\nName: "+form.nm.trim()+"\nPhone: "+form.ph.trim()+"\n"+"\n*Collection*\nRoute "+chosen().r.n+" ("+chosen().r.day+")\nLocation: "+chosen().a+(chosen().p?" – "+chosen().p:"")+"\nTime: "+chosen().t+"\n\n*Items*\n";
  m+=L.map(x=>"• "+x.n+" × "+lineName(x.s)+" – "+R(x.sub)).join("\n");
  m+="\n\n*Total: "+R(total)+"*";
  if((form.cm||"").trim())m+="\n\nNotes: "+form.cm.trim();
@@ -382,7 +398,7 @@ function validate(){
  if(!lines().length)return"Your order is empty.";
  if(!(form.nm||"").trim())return"Please enter your name.";
  if((form.ph||"").replace(/\D/g,"").length<9)return"Please enter a valid phone number.";
- if(form.m==="Delivery"&&!(form.ad||"").trim())return"Please enter your delivery address.";
+ if(!chosen())return"Please pick a collection route, location and time.";
  return""}
 function send(){const err=validate();$("err").textContent=err;if(err){$("err").scrollIntoView({block:"center"});return}window.open("https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent(buildMessage()),"_blank")}
 let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1600)}
