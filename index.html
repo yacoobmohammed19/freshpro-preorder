@@ -142,7 +142,7 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 .co input:focus,.co textarea:focus{outline:2px solid var(--leaf);border-color:transparent}
 .rts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rt{border:1px solid var(--line);background:var(--cream);border-radius:12px;padding:10px 12px;text-align:left;border-left:6px solid var(--c)}.rt b{display:block;font-size:.95rem}.rt span{font-size:.8rem;color:var(--mute)}.rt.on{background:var(--c);color:#fff}.rt.on span{color:#fff}
 .stops{display:grid;gap:8px;margin-top:10px}.stop{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px}.stop .tm{flex:none;min-width:62px;text-align:center;background:var(--cream);border-radius:8px;padding:6px 4px;font-weight:700;color:var(--g)}.stop .pl{flex:1;min-width:0}.stop .pl b{display:block}.stop .pl small{color:var(--mute);font-size:.8rem}.stop.on{border-color:var(--g);box-shadow:0 0 0 2px var(--g)}.stop.on .tm{background:var(--g);color:#fff}
-.pick{margin-top:12px;background:#e5f2e1;border-radius:12px;padding:12px 14px;font-size:.92rem;color:var(--g)}.pick:empty{display:none}.nof{color:var(--mute);font-size:.9rem;margin:10px 0 0}
+.routeimgs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:40px}.routeimgs figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}.routeimgs img{display:block;width:100%;height:auto}.routeimgs figcaption{padding:10px 14px;font-weight:700;color:var(--g);font-size:.95rem}.routeimgs figcaption span{color:var(--mute);font-weight:500}.pickbox{max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}.pickbox label{display:block;font-size:.85rem;font-weight:600;margin:0 0 5px}.pickbox input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;background:var(--cream);margin-bottom:12px}.cwrap{margin:0 20px 0}.csum{background:#e5f2e1;border-radius:12px;padding:12px 14px;font-size:.92rem;color:var(--g);margin:6px 20px 0}.csum button{margin-top:8px}.pick{margin-top:12px;background:#e5f2e1;border-radius:12px;padding:12px 14px;font-size:.92rem;color:var(--g)}.pick:empty{display:none}.nof{color:var(--mute);font-size:.9rem;margin:10px 0 0}
 .seg{display:flex;gap:8px}.seg label{flex:1;margin:0;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-weight:500}
 .seg input{display:none}.seg label:has(input:checked){background:var(--g);border-color:var(--g);color:#fff}
 .err{color:var(--warn);font-weight:600;font-size:.9rem;min-height:1.2em;margin-top:10px}
@@ -159,6 +159,7 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
  .notes{grid-template-columns:1fr}.panel-a,.contact{padding:28px 24px}
  .toast{top:76px}
 }
+@media(max-width:700px){.routeimgs{grid-template-columns:1fr}}
 @media(max-width:520px){.steps{grid-template-columns:1fr}.cats{grid-template-columns:1fr}.cta .btn{flex:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -182,6 +183,7 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
   <button class="burger" id="burger" aria-label="Menu"><svg class="ico" style="width:26px;height:26px"><use href="#i-menu"/></svg></button>
   <ul class="links" id="links">
    <li><a href="#shop">Shop</a></li>
+   <li><a href="#collect">Collection</a></li>
    <li><a href="#how">How to order</a></li>
    <li><a href="#about">About</a></li>
    <li><a href="#contact">Contact</a></li>
@@ -207,12 +209,28 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
  </div>
 </section>
 
+<section class="sec" id="collect">
+ <div class="wrap">
+  <div class="sec-h"><div class="eyebrow">Click and collect</div><h2>Choose your collection point</h2><p>Our four weekly collection routes are below. Pick the route closest to you, then your stop and time.</p></div>
+  <div class="routeimgs">
+   <figure><img src="img/routes/r1.jpg" alt="Route 1 Saturday map with stops and times" loading="lazy"><figcaption>Route 1 <span>· Saturday</span></figcaption></figure>
+   <figure><img src="img/routes/r2.jpg" alt="Route 2 Sunday map with stops and times" loading="lazy"><figcaption>Route 2 <span>· Sunday</span></figcaption></figure>
+   <figure><img src="img/routes/r3.jpg" alt="Route 3 Saturday map with stops and times" loading="lazy"><figcaption>Route 3 <span>· Saturday</span></figcaption></figure>
+   <figure><img src="img/routes/r4.jpg" alt="Route 4 Sunday map with stops and times" loading="lazy"><figcaption>Route 4 <span>· Sunday</span></figcaption></figure>
+  </div>
+  <div class="pickbox">
+   <label for="q">Find your suburb or school</label><input id="q" type="search" placeholder="Type your suburb or school, e.g. Fourways" autocomplete="off">
+   <div id="pk"></div>
+  </div>
+ </div>
+</section>
+
 <section class="sec how" id="how">
  <div class="wrap">
   <div class="sec-h"><div class="eyebrow">How to order</div><h2>Four simple steps</h2></div>
   <div class="steps">
    <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-list"/></svg></div><h3>1. Pick your fruit</h3><p>Choose your items, sizes and quantities. Fruit that is in season is highlighted as you shop.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-pin"/></svg></div><h3>2. Pick your location</h3><p>Pick a collection route, then the stop and time closest to you.</p></div>
+   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-pin"/></svg></div><h3>2. Pick your location</h3><p>See the four routes, then choose your route, stop and time closest to you.</p></div>
    <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-wa"/></svg></div><h3>3. Confirm on WhatsApp</h3><p>Tap Order on WhatsApp with your order pre-written, then wait for your confirmation and ORDER NUMBER.</p></div>
    <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-hand"/></svg></div><h3>4. Collect and pay</h3><p>Click and collect your order and pay by card on our Yoco or Capitec machines.</p></div>
   </div>
@@ -342,16 +360,16 @@ function pickerHTML(){
  const c=chosen();return h+'<div class="pick">'+(c?"Collecting at <b>"+esc(c.a)+(c.p?" ("+esc(c.p)+")":"")+"</b>, Route "+c.r.n+" "+c.r.day+" at <b>"+c.t+"</b>":"")+'</div>'}
 function lines(){return Object.entries(cart).filter(([k,v])=>v>0&&SKU[k]).map(([k,v])=>({k,n:v,s:SKU[k],sub:v*SKU[k].price}))}
 function totals(){const L=lines();return{L,total:L.reduce((a,x)=>a+x.sub,0),count:L.reduce((a,x)=>a+x.n,0)}}
-function drawCart(){setStep(2);
+function drawCart(){setStep(chosen()?3:2);
  const{L,total,count}=totals();
  $("ph").innerHTML='<button class="back" data-view="shop">← Continue shopping</button><button class="x" data-close aria-label="Close">×</button>';
  if(!L.length){$("pc").innerHTML='<div class="empty"><p>Your order is empty.</p><button class="btn btn-g" data-view="shop">Browse the price list</button></div>';return}
  let h=L.map(x=>'<div class="line"><div class="nm">'+esc(x.s.name)+'</div><div class="st"><div class="stp"><button data-k="'+x.k+'" data-d="-1" aria-label="Less">−</button><span>'+x.n+'</span><button data-k="'+x.k+'" data-d="1" aria-label="More">+</button></div><strong>'+R(x.sub)+'</strong></div><div class="meta">'+esc(varLabel(x.s))+' · '+R(x.s.price)+' each<button class="rm" data-rm="'+x.k+'">Remove</button></div></div>').join("");
  h+='<div class="tot"><span>Total</span><span>'+R(total)+'</span></div><p class="subt">'+count+' item'+(count===1?"":"s")+'. Payment by card on collection.</p>';
+ h+='<div class="csum">'+(chosen()?'<b>Collection:</b> Route '+chosen().r.n+' ('+chosen().r.day+'), '+esc(chosen().a)+(chosen().p?' ('+esc(chosen().p)+')':'')+' at <b>'+chosen().t+'</b><br><button class="btn btn-g" data-pickloc>Change</button>':'<b>No collection point yet.</b> Choose your route, stop and time to finish your order.<br><button class="btn btn-g" data-pickloc>Choose collection point</button>')+'</div>';
  h+='<form class="co" id="co" onsubmit="return false"><h3>Your details</h3>'+
  '<label for="nm">Full name</label><input id="nm" autocomplete="name" value="'+esc(form.nm||"")+'">'+
  '<label for="phn">Phone number</label><input id="phn" type="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" value="'+esc(form.ph||"")+'">'+
- '<label for="q">Pick your location: find your suburb or school</label><input id="q" type="search" placeholder="Type your suburb or school, e.g. Fourways" autocomplete="off" value="'+esc(form.q||"")+'"><div id="pk">'+pickerHTML()+'</div>'+
  '<label for="cm">Notes (optional)</label><textarea id="cm" rows="2" placeholder="Anything we should know?">'+esc(form.cm||"")+'</textarea><div class="err" id="err"></div></form>';
  $("pc").innerHTML=h}
 function drawFoot(){
@@ -376,11 +394,14 @@ document.addEventListener("click",e=>{
  const rm=e.target.closest("[data-rm]");if(rm){delete cart[rm.dataset.rm];save();drawCart();return}
  const b=e.target.closest("button[data-d]");if(b){const k=b.dataset.k,s=SKU[k];cart[k]=(cart[k]||0)+ +b.dataset.d;if(cart[k]<=0)delete cart[k];if(cart[k]>99)cart[k]=99;save();
   if(view==="shop"){redrawRow(s.c.id+"|"+s.name);if(+b.dataset.d>0&&cart[k]===1)toast("Added: "+lineName(s))}else drawCart();return}
+ if(e.target.closest("[data-pickloc]")){closePanel();$("collect").scrollIntoView({behavior:"smooth"});return}
  if(e.target.closest("#send"))send();
 });
 $("pc").addEventListener("change",e=>{if(!e.target.classList.contains("sel"))return;const key=e.target.closest(".item").dataset.key;pick[key]=e.target.value;redrawRow(key)});
-$("pc").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.id==="q"){form.q=f.value;$("pk").innerHTML=pickerHTML()}else if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
-$("pc").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b||!$("pk"))return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q=""; $("q").value=""}$("err").textContent="";localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML()});
+$("q").value=form.q||"";$("pk").innerHTML=pickerHTML();
+$("q").addEventListener("input",e=>{form.q=e.target.value;$("pk").innerHTML=pickerHTML()});
+$("pc").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
+$("collect").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b)return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q="";$("q").value=""}localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML()});
 $("pc").addEventListener("scroll",()=>requestAnimationFrame(activeChip),{passive:true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel()});
 $("burger").onclick=()=>$("links").classList.toggle("open");
@@ -398,7 +419,7 @@ function validate(){
  if(!lines().length)return"Your order is empty.";
  if(!(form.nm||"").trim())return"Please enter your name.";
  if((form.ph||"").replace(/\D/g,"").length<9)return"Please enter a valid phone number.";
- if(!chosen())return"Please pick a collection route, location and time.";
+ if(!chosen())return"Please choose your collection route, location and time first.";
  return""}
 function send(){const err=validate();$("err").textContent=err;if(err){$("err").scrollIntoView({block:"center"});return}window.open("https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent(buildMessage()),"_blank")}
 let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1600)}
