@@ -332,10 +332,10 @@ function drawCart(){setStep(2);
  if(!L.length){$("pc").innerHTML='<div class="empty"><p>Your order is empty.</p><button class="btn btn-g" data-view="shop">Browse the price list</button></div>';return}
  let h=L.map(x=>'<div class="line"><div class="nm">'+esc(x.s.name)+'</div><div class="st"><div class="stp"><button data-k="'+x.k+'" data-d="-1" aria-label="Less">−</button><span>'+x.n+'</span><button data-k="'+x.k+'" data-d="1" aria-label="More">+</button></div><strong>'+R(x.sub)+'</strong></div><div class="meta">'+esc(varLabel(x.s))+' · '+R(x.s.price)+' each<button class="rm" data-rm="'+x.k+'">Remove</button></div></div>').join("");
  h+='<div class="tot"><span>Total</span><span>'+R(total)+'</span></div><p class="subt">'+count+' item'+(count===1?"":"s")+'. Payment by card on collection.</p>';
- h+='<form class="co" id="co" onsubmit="return false"><h3>Pick your location</h3>'+
+ h+='<form class="co" id="co" onsubmit="return false"><h3>Your details</h3>'+
  '<label for="nm">Full name</label><input id="nm" autocomplete="name" value="'+esc(form.nm||"")+'">'+
  '<label for="phn">Phone number</label><input id="phn" type="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" value="'+esc(form.ph||"")+'">'+
- '<label>Collection or delivery?</label><div class="seg"><label><input type="radio" name="m" value="Collection"'+(form.m!=="Delivery"?" checked":"")+'>Collection</label><label><input type="radio" name="m" value="Delivery"'+(form.m==="Delivery"?" checked":"")+'>Delivery</label></div>'+
+ '<label>Pick your location: collection or delivery</label><div class="seg"><label><input type="radio" name="m" value="Collection"'+(form.m!=="Delivery"?" checked":"")+'>Collection</label><label><input type="radio" name="m" value="Delivery"'+(form.m==="Delivery"?" checked":"")+'>Delivery</label></div>'+
  '<div id="addrWrap"'+(form.m==="Delivery"?"":" hidden")+'><label for="ad">Delivery address</label><textarea id="ad" rows="2" autocomplete="street-address">'+esc(form.ad||"")+'</textarea></div>'+
  '<label for="cm">Notes (optional)</label><textarea id="cm" rows="2" placeholder="Anything we should know?">'+esc(form.cm||"")+'</textarea><div class="err" id="err"></div></form>';
  $("pc").innerHTML=h}
