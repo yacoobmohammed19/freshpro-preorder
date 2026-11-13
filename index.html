@@ -330,7 +330,7 @@ function drawFoot(){
  $("mOrder").textContent=count?"My order · "+R(total):"Order Now";
  document.body.classList.toggle("has",count>0)}
 function save(){localStorage.setItem("fp-cart",JSON.stringify(cart));drawFoot()}
-function setView(v){view=v;v==="shop"?drawShop():drawCart();$("pc").scrollTop=0;drawFoot()}
+function setView(v){view=v;$("toast").classList.remove("on");v==="shop"?drawShop():drawCart();$("pc").scrollTop=0;drawFoot()}
 
 function openPanel(cat){document.body.classList.add("po");$("panel").setAttribute("aria-hidden","false");setView("shop");if(cat)requestAnimationFrame(()=>jump(cat));$("links").classList.remove("open")}
 function closePanel(){document.body.classList.remove("po");$("panel").setAttribute("aria-hidden","true")}
