@@ -101,6 +101,16 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 .ph-h{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--g);color:#fff}
 .ph-h h2{font-size:1.35rem}.ph-h .x{background:none;border:0;color:#fff;font-size:2rem;line-height:1;padding:0 4px}
 .ph-h .back{background:none;border:0;color:#cfe3c8;font-weight:600;padding:0;font-size:.92rem}
+.stp4{display:flex;background:#fff;border-bottom:1px solid var(--line)}
+.stp4 span{flex:1;text-align:center;padding:9px 2px;font-size:.72rem;font-weight:600;color:var(--mute);border-bottom:3px solid transparent}
+.stp4 span.on{color:var(--g);border-bottom-color:var(--g2)}
+.stp4 span.dn{color:var(--g2)}
+.stp4 b{display:block;font-size:.95rem}
+.season{margin:12px 16px 0;padding:14px 16px;background:#eef6e6;border:1px solid #cfe3c0;border-radius:14px;position:relative;box-shadow:0 6px 18px rgba(31,77,46,.12)}
+.season h4{font-size:.95rem;color:var(--g);margin:0 24px 6px 0}
+.season p{margin:0;font-size:.88rem;color:var(--ink)}
+.season .sx{position:absolute;right:8px;top:6px;background:none;border:0;font-size:1.4rem;line-height:1;color:var(--mute)}
+.stephd{padding:14px 20px 0;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g2)}
 .pc{flex:1;overflow-y:auto;overscroll-behavior:contain;position:relative}
 .chips{position:sticky;top:0;z-index:2;background:#fff;display:flex;gap:8px;overflow-x:auto;padding:12px 16px;border-bottom:1px solid var(--line);scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
@@ -155,6 +165,7 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
  <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
  <symbol id="i-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
@@ -197,10 +208,10 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
  <div class="wrap">
   <div class="sec-h"><div class="eyebrow">How to order</div><h2>Four simple steps</h2></div>
   <div class="steps">
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-list"/></svg></div><h3>Fill your cart</h3><p>Pick your items, sizes and quantities from the price list.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-wa"/></svg></div><h3>Send on WhatsApp</h3><p>Checkout opens WhatsApp with your full order pre-written. Just press send.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-check"/></svg></div><h3>Get your order number</h3><p>Our team processes your order and replies with your ORDER NUMBER.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-hand"/></svg></div><h3>Collect and pay</h3><p>Pick up your order and pay by card on our Yoco or Capitec machines.</p></div>
+   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-list"/></svg></div><h3>1. Pick your fruit</h3><p>Choose your items, sizes and quantities. Fruit that is in season is highlighted as you shop.</p></div>
+   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-pin"/></svg></div><h3>2. Pick your location</h3><p>Choose collection or delivery for your order.</p></div>
+   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-wa"/></svg></div><h3>3. Confirm on WhatsApp</h3><p>Tap Order on WhatsApp with your order pre-written, then wait for your confirmation and ORDER NUMBER.</p></div>
+   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-hand"/></svg></div><h3>4. Collect and pay</h3><p>Click and collect your order and pay by card on our Yoco or Capitec machines.</p></div>
   </div>
   <div class="notes">
    <div><b>No order number = no confirmed order.</b>When we're busy, please make sure you've received your order number before we close the order book. It confirms your order is recorded and your stock allocated.</div>
@@ -241,6 +252,7 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 <div id="overlay"></div>
 <aside id="panel" aria-label="Your order" aria-hidden="true">
  <div class="ph-h" id="ph"></div>
+ <div class="stp4" id="stp4"></div>
  <div class="pc" id="pc"></div>
  <div class="pf" id="pf"></div>
 </aside>
@@ -295,9 +307,14 @@ function row(p){
  else if(q)h+='<div class="stp"><button data-d="-1" data-k="'+sel+'" aria-label="Less">−</button><span>'+q+'</span><button data-d="1" data-k="'+sel+'" aria-label="More">+</button></div>';
  else h+='<button class="add" data-d="1" data-k="'+sel+'" aria-label="Add '+esc(p.name)+'">+</button>';
  return h+'</div>'}
-function drawShop(){
+let seasonOff=false;
+function seasonCard(){if(seasonOff)return"";
+ const nw=[...new Set(CATS.flatMap(c=>c.i.filter(x=>x[3]==="New").map(x=>x[0])))];
+ return'<div class="season" id="season"><button class="sx" data-seasonx aria-label="Close">×</button><h4>In season now</h4><p>'+(nw.length?'New this week: '+esc(nw.join(", "))+'. ':'')+'Blueberries: season ending soon, so grab them while you can.</p></div>'}
+function setStep(n){$("stp4").innerHTML=["Pick your fruit","Pick your location","Confirm on WhatsApp","Collect and pay"].map((t,i)=>'<span class="'+(i+1===n?"on":i+1<n?"dn":"")+'"><b>'+(i+1)+'</b>'+t+'</span>').join("")}
+function drawShop(){setStep(1);
  $("ph").innerHTML='<h2>Order</h2><button class="x" data-close aria-label="Close">×</button>';
- let h='<div class="chips" id="chips">'+CATS.map(c=>'<button class="chip" data-jump="'+c.id+'">'+esc(c.t)+'</button>').join("")+'</div>';
+ let h=seasonCard()+'<div class="chips" id="chips">'+CATS.map(c=>'<button class="chip" data-jump="'+c.id+'">'+esc(c.t)+'</button>').join("")+'</div>';
  h+=CATS.map(c=>'<div class="pcat" id="pc-'+c.id+'"><div class="pcat-h"><h3>'+esc(c.t)+'</h3>'+(c.sub?'<span>'+esc(c.sub)+'</span>':'')+'</div><img class="pcat-img" src="'+IMG(c.id)+'" alt="" loading="lazy">'+products(c).map(row).join("")+'</div>').join("");
  $("pc").innerHTML=h;activeChip()}
 function redrawRow(key){const el=$("pc").querySelector('.item[data-key="'+CSS.escape(key)+'"]');if(!el)return;const[cid,name]=key.split("|");el.outerHTML=row(products(CATS.find(c=>c.id===cid)).find(p=>p.name===name))}
@@ -309,13 +326,13 @@ function jump(id){const el=$("pc-"+id);if(el)$("pc").scrollTop=el.offsetTop-$("c
 /* panel: cart view */
 function lines(){return Object.entries(cart).filter(([k,v])=>v>0&&SKU[k]).map(([k,v])=>({k,n:v,s:SKU[k],sub:v*SKU[k].price}))}
 function totals(){const L=lines();return{L,total:L.reduce((a,x)=>a+x.sub,0),count:L.reduce((a,x)=>a+x.n,0)}}
-function drawCart(){
+function drawCart(){setStep(2);
  const{L,total,count}=totals();
  $("ph").innerHTML='<button class="back" data-view="shop">← Continue shopping</button><button class="x" data-close aria-label="Close">×</button>';
  if(!L.length){$("pc").innerHTML='<div class="empty"><p>Your order is empty.</p><button class="btn btn-g" data-view="shop">Browse the price list</button></div>';return}
  let h=L.map(x=>'<div class="line"><div class="nm">'+esc(x.s.name)+'</div><div class="st"><div class="stp"><button data-k="'+x.k+'" data-d="-1" aria-label="Less">−</button><span>'+x.n+'</span><button data-k="'+x.k+'" data-d="1" aria-label="More">+</button></div><strong>'+R(x.sub)+'</strong></div><div class="meta">'+esc(varLabel(x.s))+' · '+R(x.s.price)+' each<button class="rm" data-rm="'+x.k+'">Remove</button></div></div>').join("");
  h+='<div class="tot"><span>Total</span><span>'+R(total)+'</span></div><p class="subt">'+count+' item'+(count===1?"":"s")+'. Payment by card on collection.</p>';
- h+='<form class="co" id="co" onsubmit="return false"><h3>Your details</h3>'+
+ h+='<form class="co" id="co" onsubmit="return false"><h3>Pick your location</h3>'+
  '<label for="nm">Full name</label><input id="nm" autocomplete="name" value="'+esc(form.nm||"")+'">'+
  '<label for="phn">Phone number</label><input id="phn" type="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" value="'+esc(form.ph||"")+'">'+
  '<label>Collection or delivery?</label><div class="seg"><label><input type="radio" name="m" value="Collection"'+(form.m!=="Delivery"?" checked":"")+'>Collection</label><label><input type="radio" name="m" value="Delivery"'+(form.m==="Delivery"?" checked":"")+'>Delivery</label></div>'+
@@ -325,7 +342,7 @@ function drawCart(){
 function drawFoot(){
  const{total,count}=totals();
  if(view==="shop")$("pf").innerHTML='<div class="sum"><span>'+count+' item'+(count===1?"":"s")+'</span><b>'+R(total)+'</b></div><button class="btn btn-g" data-view="cart"'+(count?"":" disabled")+'>Review order</button>';
- else $("pf").innerHTML=count?'<button class="btn btn-wa" id="send"><svg class="ico"><use href="#i-wa"/></svg>Send order on WhatsApp · '+R(total)+'</button><p>Opens WhatsApp with your order pre-written. Your order is confirmed once we reply with your ORDER NUMBER.</p>':"";
+ else $("pf").innerHTML=count?'<button class="btn btn-wa" id="send"><svg class="ico"><use href="#i-wa"/></svg>Step 3: Order on WhatsApp · '+R(total)+'</button><p>Opens WhatsApp with your order pre-written. Once we reply with your ORDER NUMBER, collect and pay (step 4).</p>':"";
  $("navCount").textContent=$("fabCount").textContent=count;
  $("mOrder").textContent=count?"My order · "+R(total):"Order Now";
  document.body.classList.toggle("has",count>0)}
@@ -336,6 +353,7 @@ function openPanel(cat){document.body.classList.add("po");$("panel").setAttribut
 function closePanel(){document.body.classList.remove("po");$("panel").setAttribute("aria-hidden","true")}
 
 document.addEventListener("click",e=>{
+ if(e.target.closest("[data-seasonx]")){seasonOff=true;const el=$("season");if(el)el.remove();return}
  const o=e.target.closest("[data-open]");if(o){e.preventDefault();openPanel(o.dataset.open);return}
  if(e.target.closest("[data-close]")||e.target.id==="overlay"){closePanel();return}
  const v=e.target.closest("[data-view]");if(v&&!v.disabled){setView(v.dataset.view);return}
@@ -369,7 +387,7 @@ function validate(){
 function send(){const err=validate();$("err").textContent=err;if(err){$("err").scrollIntoView({block:"center"});return}window.open("https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent(buildMessage()),"_blank")}
 let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1600)}
 
-const local="0"+SHOP.wa.slice(2);$("waNum").textContent=local.replace(/(\d{3})(\d{3})(\d{4})/,"$1 $2 $3");
+const local="0"+SHOP.wa.slice(2);$("waNum").textContent="+27 "+SHOP.wa.slice(2).replace(/(\d{2})(\d{3})(\d{4})/,"$1 $2 $3");
 $("waChat").href="https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent("Hi "+SHOP.name+", I have a question about an order.");
 $("mCall").href="tel:+"+SHOP.wa;
 $("yr").textContent=new Date().getFullYear();
