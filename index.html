@@ -150,6 +150,21 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 .toast{position:fixed;left:50%;top:86px;transform:translate(-50%,-16px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:.88rem;opacity:0;transition:.25s;z-index:70;pointer-events:none;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
+.hero{min-height:0;padding:36px 0 44px}.hero h1{font-size:clamp(2rem,6vw,3.4rem);margin:10px 0 12px}.hero p{margin:0 0 18px}
+.fourst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:980px}
+.fourst li{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 14px;color:#fff}
+.fourst b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--leaf);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.fourst span{font-size:.86rem;line-height:1.35;color:rgba(255,255,255,.85)}.fourst strong{display:block;color:#fff;font-size:.95rem;margin-bottom:2px}
+.prog{position:sticky;top:var(--nav);z-index:30;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:rgba(248,246,240,.97);padding:10px 14px;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.prog span{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:.72rem;font-weight:600;color:var(--mute);line-height:1.15}
+.prog span b{width:26px;height:26px;border-radius:50%;background:var(--sand);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.prog span.on{color:var(--g)}.prog span.on b{background:var(--g);border-color:var(--g);color:#fff}
+.prog span.dn{color:var(--g2)}.prog span.dn b{background:var(--leaf);border-color:var(--leaf);color:var(--g)}
+.prog i{display:block;height:3px;border-radius:2px;background:var(--line);width:100%}.prog span.dn i,.prog span.on i{background:var(--g2)}
+.stg,#shop{scroll-margin-top:170px}.stg[hidden]{display:none}.stg{padding:56px 0;animation:up .5s both}.sec{padding:56px 0}
+.nextbar{text-align:center;margin-top:28px}.nextbar p{margin:0 0 10px;color:var(--mute)}.nextbar .btn:disabled{opacity:.45}
+@media(max-width:960px){.fourst{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.fourst{grid-template-columns:1fr}.prog span{font-size:.66rem}.sec-h{margin-bottom:28px}}
 @media(max-width:960px){.steps{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}}
 @media(max-width:820px){
  .links{position:fixed;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;background:#fff;padding:8px 0 16px;box-shadow:0 12px 24px rgba(0,0,0,.1);transform:translateY(-130%);transition:transform .3s;z-index:-1}
@@ -210,18 +225,27 @@ body.has .navorder .n{display:inline-flex}
 <section class="hero">
  <div class="wrap">
   <h1>Fresh produce, set aside for you.</h1>
-  <p>Pick your product, pick your collection point, confirm on WhatsApp, then collect and pay.</p>
+  <p>Four easy steps. Start by picking your product below.</p>
+  <ol class="fourst">
+   <li><b>1</b><span><strong>Pick your product</strong>Choose your fruit and produce.</span></li>
+   <li><b>2</b><span><strong>Pick your collection point</strong>Choose your route, stop and time.</span></li>
+   <li><b>3</b><span><strong>Confirm your order on WhatsApp</strong>We reply with your order number.</span></li>
+   <li><b>4</b><span><strong>Collect and pay</strong>Collect at your stop and pay by card.</span></li>
+  </ol>
  </div>
 </section>
+
+<div class="prog" id="prog" aria-label="Order progress"></div>
 
 <section class="sec" id="shop">
  <div class="wrap">
   <div class="sec-h"><div class="eyebrow">Step 1</div><h2>Pick your product</h2></div>
   <div class="cats" id="cats"></div>
+  <div class="nextbar" id="next1"></div>
  </div>
 </section>
 
-<section class="sec" id="collect">
+<section class="sec stg" id="collect" hidden>
  <div class="wrap">
   <div class="sec-h"><div class="eyebrow">Step 2</div><h2>Pick your collection point</h2></div>
   <div class="routeimgs" id="rimgs">
@@ -238,14 +262,14 @@ body.has .navorder .n{display:inline-flex}
  </div>
 </section>
 
-<section class="sec" id="order">
+<section class="sec stg" id="order" hidden>
  <div class="wrap">
   <div class="sec-h"><div class="eyebrow">Step 3</div><h2>Confirm your order on WhatsApp</h2></div>
   <div id="sendbox"></div>
  </div>
 </section>
 
-<section class="sec" id="collectpay">
+<section class="sec stg" id="collectpay" hidden>
  <div class="wrap">
   <div class="sec-h"><div class="eyebrow">Step 4</div><h2>Collect and pay</h2></div>
   <p style="text-align:center;margin:0 auto;max-width:560px">Collect your order at your chosen stop and time, and pay by card on collection.</p>
@@ -366,7 +390,19 @@ function drawFoot(){
  $("pf").innerHTML='<div class="sum"><span>'+count+' item'+(count===1?"":"s")+'</span><b>'+R(total)+'</b></div><button class="btn btn-g" data-done>Done, go to my order</button>';
  $("navCount").textContent=count;
  document.body.classList.toggle("has",count>0)}
-function save(){localStorage.setItem("fp-cart",JSON.stringify(cart));drawFoot();drawSend()}
+
+/* step reveal + progress */
+let sent=false,go2=false;
+function stage(){const{count}=totals();if(!count)return 1;if(sent&&chosen())return 4;if(chosen())return 3;return go2?2:1}
+function render(){
+ const st=stage(),{count}=totals();
+ $("collect").hidden=st<2;$("order").hidden=st<3;$("collectpay").hidden=st<4;
+ const names=["Pick your product","Pick your collection point","Confirm on WhatsApp","Collect and pay"];
+ $("prog").innerHTML=names.map((t,i)=>'<span class="'+(i+1===st?"on":i+1<st?"dn":"")+'"><i></i><b>'+(i+1<st?"✓":i+1)+'</b>'+t+'</span>').join("");
+ $("next1").innerHTML=st===1?(count?'<p>Happy with your products?</p><button class="btn btn-g" data-go2>Next: pick your collection point</button>':'<p>Pick at least one product to carry on to step 2.</p>'):"";
+}
+function reveal(id){render();requestAnimationFrame(()=>{const e=$(id);if(e&&!e.hidden)e.scrollIntoView({behavior:"smooth",block:"start"})})}
+function save(){localStorage.setItem("fp-cart",JSON.stringify(cart));drawFoot();drawSend();render()}
 function setView(v){view="shop";$("toast").classList.remove("on");drawShop();$("pc").scrollTop=0;drawFoot()}
 
 function openPanel(cat){document.body.classList.add("po");$("panel").setAttribute("aria-hidden","false");setView("shop");if(cat)requestAnimationFrame(()=>jump(cat))}
@@ -376,18 +412,20 @@ document.addEventListener("click",e=>{
  if(e.target.closest("[data-seasonx]")){seasonOff=true;const el=$("season");if(el)el.remove();return}
  const o=e.target.closest("[data-open]");if(o){e.preventDefault();openPanel(o.dataset.open);return}
  if(e.target.closest("[data-close]")||e.target.id==="overlay"){closePanel();return}
- if(e.target.closest("[data-done]")){closePanel();$("order").scrollIntoView({behavior:"smooth"});return}
+ if(e.target.closest("[data-done]")){closePanel();if(totals().count){go2=true;reveal("collect")}return}
+ if(e.target.closest("[data-go2]")){go2=true;reveal("collect");return}
  const j=e.target.closest("[data-jump]");if(j){jump(j.dataset.jump);return}
  const rm=e.target.closest("[data-rm]");if(rm){delete cart[rm.dataset.rm];save();return}
  const b=e.target.closest("button[data-d]");if(b){const k=b.dataset.k,s=SKU[k];cart[k]=(cart[k]||0)+ +b.dataset.d;if(cart[k]<=0)delete cart[k];if(cart[k]>99)cart[k]=99;save();
   if(view==="shop"){redrawRow(s.c.id+"|"+s.name);if(+b.dataset.d>0&&cart[k]===1)toast("Added: "+lineName(s))}return}
+ if(e.target.closest(".navorder")){e.preventDefault();const v=[...document.querySelectorAll("main .stg:not([hidden])")].pop()||$("shop");v.scrollIntoView({behavior:"smooth"});return}
  if(e.target.closest("#wasend"))send();
 });
 $("pc").addEventListener("change",e=>{if(!e.target.classList.contains("sel"))return;const key=e.target.closest(".item").dataset.key;pick[key]=e.target.value;redrawRow(key)});
 $("q").value=form.q||"";$("pk").innerHTML=pickerHTML();
 $("q").addEventListener("input",e=>{form.q=e.target.value;$("pk").innerHTML=pickerHTML()});
 $("sendbox").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
-$("collect").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b)return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q="";$("q").value=""}localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML();drawSend()});
+$("collect").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b)return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q="";$("q").value=""}localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML();drawSend();if(b.dataset.s!==undefined){const was=!$("order").hidden;if(was)render();else reveal("order")}else render()});
 $("pc").addEventListener("scroll",()=>requestAnimationFrame(activeChip),{passive:true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel()});
 
@@ -404,12 +442,12 @@ function validate(){
  if((form.ph||"").replace(/\D/g,"").length<9)return"Please enter a valid phone number.";
  if(!chosen())return"Please choose your collection route, location and time first.";
  return""}
-function send(){const err=validate();$("err").textContent=err;if(err){$("err").scrollIntoView({block:"center"});return}window.open("https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent(buildMessage()),"_blank")}
+function send(){const err=validate();$("err").textContent=err;if(err){$("err").scrollIntoView({block:"center"});return}window.open("https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent(buildMessage()),"_blank");sent=true;reveal("collectpay")}
 let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1600)}
 
 const local="0"+SHOP.wa.slice(2);$("waNum").textContent="+27 "+SHOP.wa.slice(2).replace(/(\d{2})(\d{3})(\d{4})/,"$1 $2 $3");
 $("yr").textContent=new Date().getFullYear();
-drawFoot();drawSend();
+drawFoot();drawSend();render();
 </script>
 </body>
 </html>
