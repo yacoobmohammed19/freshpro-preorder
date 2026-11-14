@@ -150,12 +150,23 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 .toast{position:fixed;left:50%;top:86px;transform:translate(-50%,-16px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:.88rem;opacity:0;transition:.25s;z-index:70;pointer-events:none;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
-.hero{min-height:0;padding:36px 0 44px}.hero h1{font-size:clamp(2rem,6vw,3.4rem);margin:10px 0 12px}.hero p{margin:0 0 18px}
-.about{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:980px;margin:0 0 22px}.about div{background:rgba(255,255,255,.1);border-left:3px solid var(--leaf);border-radius:10px;padding:10px 14px}.about dt{font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--leaf);margin:0 0 4px}.about dd{margin:0;font-size:.95rem;color:#fff}.hero p.how1{font-weight:700;margin:0 0 10px;color:#fff;font-size:1rem}@media(max-width:720px){.about{grid-template-columns:1fr}}
-.fourst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:980px}
-.fourst li{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 14px;color:#fff}
-.fourst b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--leaf);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:.9rem}
-.fourst span{font-size:.86rem;line-height:1.35;color:rgba(255,255,255,.85)}.fourst strong{display:block;color:#fff;font-size:.95rem;margin-bottom:2px}
+.hero{min-height:min(88vh,760px);padding:calc(var(--nav) + 40px) 0 64px}.hero .wrap{padding-top:0}
+.hero h1{font-size:clamp(2.4rem,7vw,4.4rem);max-width:720px;margin:16px 0 20px}.hero p{font-size:1.12rem;max-width:540px;margin:0 0 32px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.hero .cta .btn{padding:16px 30px}
+.hero .facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:34px 0 0;padding:0;list-style:none;font-size:.9rem;color:rgba(255,255,255,.85);animation:up .8s .4s both}
+.hero .facts li{display:flex;align-items:center;gap:8px}.hero .facts .ico{width:18px;height:18px;color:var(--leaf)}
+.offer{background:var(--cream);padding:88px 0}.offer .sec-h{max-width:680px}.offer .sec-h p{font-size:1.08rem;line-height:1.7}
+.vals{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1040px;margin:0 auto}
+.vals article{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px}
+.vals .vi{width:48px;height:48px;border-radius:14px;background:#eef6e6;color:var(--g2);display:flex;align-items:center;justify-content:center;margin:0 0 18px}.vals .vi .ico{width:24px;height:24px}
+.vals h3{font-size:1.3rem;color:var(--g);margin:0 0 10px}.vals p{margin:0;color:var(--mute);font-size:.98rem}
+.range{max-width:760px;margin:44px auto 0;text-align:center;color:var(--ink);font-size:1rem}.range b{color:var(--g)}
+.how{background:var(--sand);padding:88px 0}
+.fourst{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1080px;counter-reset:s}
+.fourst li{background:#fff;border-radius:var(--r);padding:28px 24px;border:1px solid var(--line)}
+.fourst b{width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 0 16px}
+.fourst strong{display:block;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.15rem;color:var(--g);margin:0 0 6px;line-height:1.2}.fourst span{font-size:.95rem;color:var(--mute);line-height:1.5}
+.how .go{text-align:center;margin-top:44px}
 .prog{position:sticky;top:var(--nav);z-index:30;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:rgba(248,246,240,.97);padding:10px 14px;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
 .prog span{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:.72rem;font-weight:600;color:var(--mute);line-height:1.15}
 .prog span b{width:26px;height:26px;border-radius:50%;background:var(--sand);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.8rem}
@@ -164,8 +175,8 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 .prog i{display:block;height:3px;border-radius:2px;background:var(--line);width:100%}.prog span.dn i,.prog span.on i{background:var(--g2)}
 .stg,#shop{scroll-margin-top:170px}.stg[hidden]{display:none}.stg{padding:56px 0;animation:up .5s both}.sec{padding:56px 0}
 .nextbar{text-align:center;margin-top:28px}.nextbar p{margin:0 0 10px;color:var(--mute)}.nextbar .btn:disabled{opacity:.45}
-@media(max-width:960px){.fourst{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.fourst{grid-template-columns:1fr}.prog span{font-size:.66rem}.sec-h{margin-bottom:28px}}
+@media(max-width:960px){.fourst{grid-template-columns:1fr 1fr}.vals{grid-template-columns:1fr;max-width:560px}}
+@media(max-width:520px){.fourst{grid-template-columns:1fr;gap:14px}.fourst li{display:grid;grid-template-columns:40px 1fr;gap:0 16px;padding:22px 20px}.fourst b{margin:0}.offer,.how{padding:64px 0}.vals{gap:16px}.vals article{padding:26px 22px}.hero{min-height:0;padding:calc(var(--nav) + 36px) 0 52px}.hero .cta .btn{width:100%}.prog span{font-size:.66rem}.sec-h{margin-bottom:28px}}
 @media(max-width:960px){.steps{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}}
 @media(max-width:820px){
  .links{position:fixed;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;background:#fff;padding:8px 0 16px;box-shadow:0 12px 24px rgba(0,0,0,.1);transform:translateY(-130%);transition:transform .3s;z-index:-1}
@@ -200,6 +211,7 @@ body.has .navorder .n{display:inline-flex}
 .sendgo p{font-size:.8rem;color:var(--mute);margin:8px 0 0;text-align:center}
 .mcta{display:none!important}body{padding-bottom:0!important}
 @media(max-width:960px){.routeimgs{grid-template-columns:1fr}}
+@media(max-width:520px){.hero .cta{flex-direction:column;align-items:stretch}.hero .cta .btn{width:100%;white-space:nowrap}.hero:before{background:linear-gradient(180deg,rgba(14,34,21,.66) 0%,rgba(14,34,21,.82) 100%)}.hero h1{font-size:2.35rem}}
 </style>
 </head>
 <body>
@@ -225,20 +237,39 @@ body.has .navorder .n{display:inline-flex}
 <main id="top">
 <section class="hero">
  <div class="wrap">
-  <h1>Fresh produce, set aside for you.</h1>
-  <p style="margin-bottom:20px">Freshpro Market is a fresh fruit and produce pre-order. Order online now, then collect at a stop near you. Collection only, no delivery.</p>
-  <dl class="about">
-   <div><dt>Where and when</dt><dd>Four collection routes run on Saturday and Sunday, each with set stops and times.</dd></div>
-   <div><dt>Confirming</dt><dd>You send your order on WhatsApp and we reply with your order number.</dd></div>
-   <div><dt>Paying</dt><dd>You pay by card when you collect. Nothing to pay online.</dd></div>
-  </dl>
-  <p class="how1">How it works, in four steps:</p>
+  <div class="eyebrow">Weekly fresh produce pre-order</div>
+  <h1>From the farm, to a stop close to your door.</h1>
+  <p>Fresh fruit and veg, set aside for you. Order this week's produce online, confirm on WhatsApp and collect it near home on Saturday or Sunday.</p>
+  <div class="cta"><a class="btn btn-pri" href="#shop">Start your order <svg class="ico"><use href="#i-arrow"/></svg></a><a class="btn btn-sec" href="#how">How it works</a></div>
+  <ul class="facts">
+   <li><svg class="ico"><use href="#i-pin"/></svg>Collection only, no delivery</li>
+   <li><svg class="ico"><use href="#i-hand"/></svg>Pay by card when you collect</li>
+  </ul>
+ </div>
+</section>
+
+<section class="offer" id="about">
+ <div class="wrap">
+  <div class="sec-h"><div class="eyebrow">What we offer</div><h2>Fresh from the farm, without the market rush</h2><p>Freshpro Market brings fresh fruit and vegetables from the farm to collection stops close to where you live. You choose what you want for the week, we set it aside for you, and you pick it up on your way. No trawling the shops and no guessing what's in stock.</p></div>
+  <div class="vals">
+   <article><div class="vi"><svg class="ico"><use href="#i-bag"/></svg></div><h3>Fresh fruit and veg</h3><p>Seasonal fruit and everyday vegetables, plus specials on what's in season right now.</p></article>
+   <article><div class="vi"><svg class="ico"><use href="#i-check"/></svg></div><h3>Set aside, just for you</h3><p>It's a pre-order, so your order is booked before collection day and waiting for you when you arrive.</p></article>
+   <article><div class="vi"><svg class="ico"><use href="#i-pin"/></svg></div><h3>Collected close to home</h3><p>Four collection routes on Saturday and Sunday, each with its own stops and times. Pick the one nearest you.</p></article>
+  </div>
+  <p class="range"><b>And for the rest of the kitchen:</b> frozen fruit, nuts, dried fruit, honey, eggs and macadamias, frozen lollies, frozen meals and sweets.</p>
+ </div>
+</section>
+
+<section class="how" id="how">
+ <div class="wrap">
+  <div class="sec-h"><div class="eyebrow">How it works</div><h2>Four simple steps</h2></div>
   <ol class="fourst">
-   <li><b>1</b><span><strong>Pick your product</strong>Choose your fruit and produce.</span></li>
-   <li><b>2</b><span><strong>Pick your collection point</strong>Choose your route, stop and time.</span></li>
-   <li><b>3</b><span><strong>Confirm your order on WhatsApp</strong>We reply with your order number.</span></li>
-   <li><b>4</b><span><strong>Collect and pay</strong>Collect at your stop and pay by card.</span></li>
+   <li><b>1</b><div><strong>Pick your product</strong><span>Browse this week's produce and add what you'd like to your order.</span></div></li>
+   <li><b>2</b><div><strong>Pick your collection point</strong><span>Choose your route, stop and time on Saturday or Sunday.</span></div></li>
+   <li><b>3</b><div><strong>Confirm on WhatsApp</strong><span>Send your order to +27 63 646 3938 and we reply with your order number.</span></div></li>
+   <li><b>4</b><div><strong>Collect and pay</strong><span>Collect at your stop and pay by card on collection.</span></div></li>
   </ol>
+  <div class="go"><a class="btn btn-g" href="#shop">Start with step 1</a></div>
  </div>
 </section>
 
