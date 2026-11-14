@@ -162,6 +162,28 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
 @media(max-width:700px){.routeimgs{grid-template-columns:1fr}}
 @media(max-width:520px){.steps{grid-template-columns:1fr}.cats{grid-template-columns:1fr}.cta .btn{flex:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* simplified mobile-first layout */
+.navorder{background:var(--leaf);color:#13301d;padding:10px 20px;border-radius:999px;font-weight:600;display:inline-flex;gap:8px;align-items:center}
+.navorder .n{background:var(--g);color:#fff;border-radius:999px;font-size:.75rem;min-width:22px;height:22px;display:none;align-items:center;justify-content:center;padding:0 6px}
+body.has .navorder .n{display:inline-flex}
+.hero{min-height:0}.hero .wrap{padding:calc(var(--nav) + 28px) 22px 34px}.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:0 0 10px}.hero p{font-size:1.05rem;margin:0}
+.sec{padding:44px 0}.sec-h{margin-bottom:22px}.sec-h h2{font-size:clamp(1.5rem,4vw,2.1rem);margin:6px 0 0}
+.routeimgs{margin-bottom:0}
+.rimg{position:relative;display:block;padding:0;border:3px solid transparent;border-radius:var(--r);background:#fff;overflow:hidden;text-align:left;box-shadow:0 4px 16px rgba(31,77,46,.1);transition:border-color .2s,transform .15s}
+.rimg:active{transform:scale(.99)}
+.rimg img{display:block;width:100%;height:auto}
+.rimg .cap{display:block;padding:12px 14px;font-weight:700;color:var(--g);font-size:1.05rem}.rimg .cap em{font-style:normal;color:var(--mute);font-weight:500}
+.rimg.on{border-color:var(--g2)}.rimg.on .cap{background:var(--g2);color:#fff}.rimg.on .cap em{color:#e5f2e1}
+.rimg.on .cap:after{content:"✓ Selected";float:right;font-size:.9rem}
+.pickbox{padding:16px}.pickbox .pick{margin-top:14px}
+#sendbox{max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:6px 0 20px}
+#sendbox .empty{padding:28px 24px}
+.sendgo{padding:0 20px}.sendgo .btn{width:100%;border-radius:12px;padding:16px;font-size:1.05rem}
+.fine{font-size:.82rem;color:var(--mute);margin:14px 20px 0}.fine b{color:var(--warn)}
+.sendgo p{font-size:.8rem;color:var(--mute);margin:8px 0 0;text-align:center}
+.mcta{display:none!important}body{padding-bottom:0!important}
+@media(max-width:960px){.routeimgs{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -177,103 +199,62 @@ body.po #panel{transform:none}body.po #overlay{opacity:1;pointer-events:auto}bod
  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
 </svg>
 
-<nav id="nav">
+<nav id="nav" class="solid">
  <div class="wrap">
   <a href="#top" class="logo" aria-label="Freshpro Market home"><img src="img/logo.png" alt="Freshpro Market"></a>
-  <button class="burger" id="burger" aria-label="Menu"><svg class="ico" style="width:26px;height:26px"><use href="#i-menu"/></svg></button>
-  <ul class="links" id="links">
-   <li><a href="#shop">Shop</a></li>
-   <li><a href="#collect">Collection</a></li>
-   <li><a href="#how">How to order</a></li>
-   <li><a href="#about">About</a></li>
-   <li><a href="#contact">Contact</a></li>
-   <li class="order"><a href="#" data-open>Order Now <span class="n" id="navCount">0</span></a></li>
-  </ul>
+  <a class="navorder" href="#order">My order <span class="n" id="navCount">0</span></a>
  </div>
 </nav>
 
 <main id="top">
 <section class="hero">
  <div class="wrap">
-  <div class="eyebrow">Weekly pre-orders</div>
   <h1>Fresh produce, set aside for you.</h1>
-  <p>Fresh fruit and veg, frozen fruit, nuts, dried fruit, honey and frozen meals. Fill your cart, send your order on WhatsApp, and collect when it's ready.</p>
-  <div class="cta"><button class="btn btn-pri" data-open>Order Now</button><a class="btn btn-sec" href="#how">How it works</a></div>
- </div>
-</section>
-
-<section class="sec" id="shop">
- <div class="wrap">
-  <div class="sec-h"><div class="eyebrow">This week's price list</div><h2>Shop by category</h2><p>Choose a category, pick your sizes and quantities, and send your order. Prices are as per the current weekly price list.</p></div>
-  <div class="cats" id="cats"></div>
+  <p>Pick your route, your stop and your fruit, then send your order on WhatsApp.</p>
  </div>
 </section>
 
 <section class="sec" id="collect">
  <div class="wrap">
-  <div class="sec-h"><div class="eyebrow">Click and collect</div><h2>Choose your collection point</h2><p>Our four weekly collection routes are below. Pick the route closest to you, then your stop and time.</p></div>
-  <div class="routeimgs">
-   <figure><img src="img/routes/r1.jpg" alt="Route 1 Saturday map with stops and times" loading="lazy"><figcaption>Route 1 <span>· Saturday</span></figcaption></figure>
-   <figure><img src="img/routes/r2.jpg" alt="Route 2 Sunday map with stops and times" loading="lazy"><figcaption>Route 2 <span>· Sunday</span></figcaption></figure>
-   <figure><img src="img/routes/r3.jpg" alt="Route 3 Saturday map with stops and times" loading="lazy"><figcaption>Route 3 <span>· Saturday</span></figcaption></figure>
-   <figure><img src="img/routes/r4.jpg" alt="Route 4 Sunday map with stops and times" loading="lazy"><figcaption>Route 4 <span>· Sunday</span></figcaption></figure>
+  <div class="sec-h"><div class="eyebrow">Step 1</div><h2>Tap your collection route</h2></div>
+  <div class="routeimgs" id="rimgs">
+   <button type="button" class="rimg" data-route="1"><img src="img/routes/r1.jpg" alt="Route 1 Saturday map with stops and times"><span class="cap">Route 1 <em>· Saturday</em></span></button>
+   <button type="button" class="rimg" data-route="2"><img src="img/routes/r2.jpg" alt="Route 2 Sunday map with stops and times"><span class="cap">Route 2 <em>· Sunday</em></span></button>
+   <button type="button" class="rimg" data-route="3"><img src="img/routes/r3.jpg" alt="Route 3 Saturday map with stops and times"><span class="cap">Route 3 <em>· Saturday</em></span></button>
+   <button type="button" class="rimg" data-route="4"><img src="img/routes/r4.jpg" alt="Route 4 Sunday map with stops and times"><span class="cap">Route 4 <em>· Sunday</em></span></button>
   </div>
+  <div class="sec-h" style="margin-top:36px"><div class="eyebrow">Step 2</div><h2>Tap your stop and time</h2></div>
   <div class="pickbox">
-   <label for="q">Find your suburb or school</label><input id="q" type="search" placeholder="Type your suburb or school, e.g. Fourways" autocomplete="off">
+   <input id="q" type="search" placeholder="Or search your suburb or school" autocomplete="off" aria-label="Search your suburb or school">
    <div id="pk"></div>
   </div>
  </div>
 </section>
 
-<section class="sec how" id="how">
+<section class="sec" id="shop">
  <div class="wrap">
-  <div class="sec-h"><div class="eyebrow">How to order</div><h2>Four simple steps</h2></div>
-  <div class="steps">
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-list"/></svg></div><h3>1. Pick your fruit</h3><p>Choose your items, sizes and quantities. Fruit that is in season is highlighted as you shop.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-pin"/></svg></div><h3>2. Pick your location</h3><p>See the four routes, then choose your route, stop and time closest to you.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-wa"/></svg></div><h3>3. Confirm on WhatsApp</h3><p>Tap Order on WhatsApp with your order pre-written, then wait for your confirmation and ORDER NUMBER.</p></div>
-   <div class="step-c"><div class="circ"><svg class="ico"><use href="#i-hand"/></svg></div><h3>4. Collect and pay</h3><p>Click and collect your order and pay by card on our Yoco or Capitec machines.</p></div>
-  </div>
-  <div class="notes">
-   <div><b>No order number = no confirmed order.</b>When we're busy, please make sure you've received your order number before we close the order book. It confirms your order is recorded and your stock allocated.</div>
-   <div><b>The order book closes Thursday night.</b>Some orders are accepted on Friday morning or afternoon, but we can close at any time if we become fully booked, so place your order as soon as you can.</div>
-  </div>
+  <div class="sec-h"><div class="eyebrow">Step 3</div><h2>Tap a category to pick your fruit</h2></div>
+  <div class="cats" id="cats"></div>
  </div>
 </section>
 
-<section class="sec" id="about">
- <div class="wrap split">
-  <div class="panel-a">
-   <div class="eyebrow">About us</div>
-   <h2>Freshpro Market</h2>
-   <p>We run a weekly order book for fresh fruit and vegetables, seasonal specials, frozen fruit, nuts, dried fruit, honey, macadamia products and frozen meals.</p>
-   <p>Because we work on pre-orders, your items are allocated to you before the week's stock comes in, so you don't miss out on your favourites.</p>
-   <p style="margin:0">Prefer a form? Our Neartail order form is linked under Website on our WhatsApp profile. It captures orders only, it doesn't take payments.</p>
-  </div>
-  <div class="contact" id="contact">
-   <div class="eyebrow">Contact</div>
-   <h2>Questions about an order?</h2>
-   <p>Message us on WhatsApp for stock, sizes or anything about your order. Can we pencil in an order for you this week?</p>
-   <div class="num" id="waNum"></div>
-   <div class="row"><a class="btn btn-wa" id="waChat" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Chat on WhatsApp</a><button class="btn btn-sec" data-open>Start an order</button></div>
-  </div>
+<section class="sec" id="order">
+ <div class="wrap">
+  <div class="sec-h"><div class="eyebrow">Step 4</div><h2>Check and send on WhatsApp</h2></div>
+  <div id="sendbox"></div>
  </div>
 </section>
 </main>
 
 <footer><div class="wrap">
  <img src="img/logo.png" alt="Freshpro Market">
- <span>© <span id="yr"></span> Freshpro Market · Prices as per the current weekly price list · <a href="credits.html">Photo credits</a></span>
+ <span>© <span id="yr"></span> Freshpro Market · WhatsApp <span id="waNum"></span> · <a href="credits.html">Photo credits</a></span>
  <a class="by" href="https://cococorp.tech" target="_blank" rel="noopener">Website by CocoCorp</a>
 </div></footer>
-
-<button class="fab" data-open aria-label="Open your order"><svg class="ico"><use href="#i-bag"/></svg><span class="n" id="fabCount">0</span></button>
-<div class="mcta"><button class="m-order" data-open id="mOrder">Order Now</button><a class="m-call" id="mCall"><svg class="ico"><use href="#i-phone"/></svg>Call</a></div>
 
 <div id="overlay"></div>
 <aside id="panel" aria-label="Your order" aria-hidden="true">
  <div class="ph-h" id="ph"></div>
- <div class="stp4" id="stp4"></div>
  <div class="pc" id="pc"></div>
  <div class="pf" id="pf"></div>
 </aside>
@@ -332,7 +313,7 @@ let seasonOff=false;
 function seasonCard(){if(seasonOff)return"";
  const nw=[...new Set(CATS.flatMap(c=>c.i.filter(x=>x[3]==="New").map(x=>x[0])))];
  return'<div class="season" id="season"><button class="sx" data-seasonx aria-label="Close">×</button><h4>In season now</h4><p>'+(nw.length?'New this week: '+esc(nw.join(", "))+'. ':'')+'Blueberries: season ending soon, so grab them while you can.</p></div>'}
-function setStep(n){$("stp4").innerHTML=["Pick your fruit","Pick your location","Confirm on WhatsApp","Collect and pay"].map((t,i)=>'<span class="'+(i+1===n?"on":i+1<n?"dn":"")+'"><b>'+(i+1)+'</b>'+t+'</span>').join("")}
+function setStep(n){return;$("stp4").innerHTML=["Pick your fruit","Pick your location","Confirm on WhatsApp","Collect and pay"].map((t,i)=>'<span class="'+(i+1===n?"on":i+1<n?"dn":"")+'"><b>'+(i+1)+'</b>'+t+'</span>').join("")}
 function drawShop(){setStep(1);
  $("ph").innerHTML='<h2>Order</h2><button class="x" data-close aria-label="Close">×</button>';
  let h=seasonCard()+'<div class="chips" id="chips">'+CATS.map(c=>'<button class="chip" data-jump="'+c.id+'">'+esc(c.t)+'</button>').join("")+'</div>';
@@ -356,57 +337,52 @@ function chosen(){const r=ROUTES.find(r=>r.n===form.r);return r&&r.st[form.s]?r.
 function pickerHTML(){
  const q=(form.q||"").trim().toLowerCase();let h="";
  if(q){const m=ROUTES.flatMap(r=>r.st).filter(x=>(x.a+" "+x.p).toLowerCase().includes(q));h=m.length?'<div class="stops">'+m.map(x=>stopCard(x,1)).join("")+'</div>':'<p class="nof">No stop matches that. Try a nearby suburb or clear the search to browse by route.</p>'}
- else{const r=ROUTES.find(r=>r.n===form.r);h='<div class="rts">'+ROUTES.map(x=>'<button type="button" class="rt'+(x===r?" on":"")+'" style="--c:'+x.c+'" data-route="'+x.n+'"><b>Route '+x.n+'</b><span>'+x.day+' · '+x.st[0].t+" to "+x.st[x.st.length-1].t+'</span></button>').join("")+'</div>'+(r?'<div class="stops">'+r.st.map(x=>stopCard(x)).join("")+'</div>':'<p class="nof">Choose a route to see its stops and times.</p>')}
+ else{const r=ROUTES.find(r=>r.n===form.r);h=r?'<p class="nof" style="margin:0 0 4px"><b>Route '+r.n+' · '+r.day+'</b></p><div class="stops">'+r.st.map(x=>stopCard(x)).join("")+'</div>':'<p class="nof">Tap a route above to see its stops and times here.</p>'}
+ document.querySelectorAll(".rimg").forEach(b=>b.classList.toggle("on",+b.dataset.route===form.r&&!q))
  const c=chosen();return h+'<div class="pick">'+(c?"Collecting at <b>"+esc(c.a)+(c.p?" ("+esc(c.p)+")":"")+"</b>, Route "+c.r.n+" "+c.r.day+" at <b>"+c.t+"</b>":"")+'</div>'}
 function lines(){return Object.entries(cart).filter(([k,v])=>v>0&&SKU[k]).map(([k,v])=>({k,n:v,s:SKU[k],sub:v*SKU[k].price}))}
 function totals(){const L=lines();return{L,total:L.reduce((a,x)=>a+x.sub,0),count:L.reduce((a,x)=>a+x.n,0)}}
-function drawCart(){setStep(chosen()?3:2);
- const{L,total,count}=totals();
- $("ph").innerHTML='<button class="back" data-view="shop">← Continue shopping</button><button class="x" data-close aria-label="Close">×</button>';
- if(!L.length){$("pc").innerHTML='<div class="empty"><p>Your order is empty.</p><button class="btn btn-g" data-view="shop">Browse the price list</button></div>';return}
- let h=L.map(x=>'<div class="line"><div class="nm">'+esc(x.s.name)+'</div><div class="st"><div class="stp"><button data-k="'+x.k+'" data-d="-1" aria-label="Less">−</button><span>'+x.n+'</span><button data-k="'+x.k+'" data-d="1" aria-label="More">+</button></div><strong>'+R(x.sub)+'</strong></div><div class="meta">'+esc(varLabel(x.s))+' · '+R(x.s.price)+' each<button class="rm" data-rm="'+x.k+'">Remove</button></div></div>').join("");
- h+='<div class="tot"><span>Total</span><span>'+R(total)+'</span></div><p class="subt">'+count+' item'+(count===1?"":"s")+'. Payment by card on collection.</p>';
- h+='<div class="csum">'+(chosen()?'<b>Collection:</b> Route '+chosen().r.n+' ('+chosen().r.day+'), '+esc(chosen().a)+(chosen().p?' ('+esc(chosen().p)+')':'')+' at <b>'+chosen().t+'</b><br><button class="btn btn-g" data-pickloc>Change</button>':'<b>No collection point yet.</b> Choose your route, stop and time to finish your order.<br><button class="btn btn-g" data-pickloc>Choose collection point</button>')+'</div>';
- h+='<form class="co" id="co" onsubmit="return false"><h3>Your details</h3>'+
- '<label for="nm">Full name</label><input id="nm" autocomplete="name" value="'+esc(form.nm||"")+'">'+
+function drawSend(){
+ const{L,total,count}=totals(),c=chosen();let h="";
+ if(L.length){h+=L.map(x=>'<div class="line"><div class="nm">'+esc(x.s.name)+'</div><div class="st"><div class="stp"><button data-k="'+x.k+'" data-d="-1" aria-label="Less">−</button><span>'+x.n+'</span><button data-k="'+x.k+'" data-d="1" aria-label="More">+</button></div><strong>'+R(x.sub)+'</strong></div><div class="meta">'+esc(varLabel(x.s))+' · '+R(x.s.price)+' each<button class="rm" data-rm="'+x.k+'">Remove</button></div></div>').join("");
+  h+='<div class="tot"><span>Total</span><span>'+R(total)+'</span></div><p class="subt">'+count+' item'+(count===1?"":"s")+'. Payment by card on collection.</p>'}
+ else h+='<div class="empty"><p>No fruit picked yet.</p><button class="btn btn-g" data-open="">Pick your fruit</button></div>';
+ h+='<div class="csum">'+(c?'<b>Collection:</b> Route '+c.r.n+' ('+c.r.day+'), '+esc(c.a)+(c.p?' ('+esc(c.p)+')':'')+' at <b>'+c.t+'</b>':'<b>No collection stop yet.</b> Tap your route and stop above.')+'</div>';
+ h+='<form class="co" id="co" onsubmit="return false"><label for="nm">Full name</label><input id="nm" autocomplete="name" value="'+esc(form.nm||"")+'">'+
  '<label for="phn">Phone number</label><input id="phn" type="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" value="'+esc(form.ph||"")+'">'+
- '<label for="cm">Notes (optional)</label><textarea id="cm" rows="2" placeholder="Anything we should know?">'+esc(form.cm||"")+'</textarea><div class="err" id="err"></div></form>';
- $("pc").innerHTML=h}
+ '<label for="cm">Notes (optional)</label><textarea id="cm" rows="2" placeholder="Anything we should know?">'+esc(form.cm||"")+'</textarea></form>';
+ h+='<p class="fine"><b>No order number = no confirmed order.</b> The order book closes Thursday night, so order early.</p>';
+ h+='<div class="err" id="err" style="margin:6px 20px 12px"></div><div class="sendgo"><button class="btn btn-wa" id="wasend"><svg class="ico"><use href="#i-wa"/></svg>Order on WhatsApp'+(count?' · '+R(total):'')+'</button><p>Opens WhatsApp with your order pre-written. We reply with your ORDER NUMBER.</p></div>';
+ $("sendbox").innerHTML=h}
 function drawFoot(){
  const{total,count}=totals();
- if(view==="shop")$("pf").innerHTML='<div class="sum"><span>'+count+' item'+(count===1?"":"s")+'</span><b>'+R(total)+'</b></div><button class="btn btn-g" data-view="cart"'+(count?"":" disabled")+'>Review order</button>';
- else $("pf").innerHTML=count?'<button class="btn btn-wa" id="send"><svg class="ico"><use href="#i-wa"/></svg>Step 3: Order on WhatsApp · '+R(total)+'</button><p>Opens WhatsApp with your order pre-written. Once we reply with your ORDER NUMBER, collect and pay (step 4).</p>':"";
- $("navCount").textContent=$("fabCount").textContent=count;
- $("mOrder").textContent=count?"My order · "+R(total):"Order Now";
+ $("pf").innerHTML='<div class="sum"><span>'+count+' item'+(count===1?"":"s")+'</span><b>'+R(total)+'</b></div><button class="btn btn-g" data-done>Done, go to my order</button>';
+ $("navCount").textContent=count;
  document.body.classList.toggle("has",count>0)}
-function save(){localStorage.setItem("fp-cart",JSON.stringify(cart));drawFoot()}
-function setView(v){view=v;$("toast").classList.remove("on");v==="shop"?drawShop():drawCart();$("pc").scrollTop=0;drawFoot()}
+function save(){localStorage.setItem("fp-cart",JSON.stringify(cart));drawFoot();drawSend()}
+function setView(v){view="shop";$("toast").classList.remove("on");drawShop();$("pc").scrollTop=0;drawFoot()}
 
-function openPanel(cat){document.body.classList.add("po");$("panel").setAttribute("aria-hidden","false");setView("shop");if(cat)requestAnimationFrame(()=>jump(cat));$("links").classList.remove("open")}
+function openPanel(cat){document.body.classList.add("po");$("panel").setAttribute("aria-hidden","false");setView("shop");if(cat)requestAnimationFrame(()=>jump(cat))}
 function closePanel(){document.body.classList.remove("po");$("panel").setAttribute("aria-hidden","true")}
 
 document.addEventListener("click",e=>{
  if(e.target.closest("[data-seasonx]")){seasonOff=true;const el=$("season");if(el)el.remove();return}
  const o=e.target.closest("[data-open]");if(o){e.preventDefault();openPanel(o.dataset.open);return}
  if(e.target.closest("[data-close]")||e.target.id==="overlay"){closePanel();return}
- const v=e.target.closest("[data-view]");if(v&&!v.disabled){setView(v.dataset.view);return}
+ if(e.target.closest("[data-done]")){closePanel();$("order").scrollIntoView({behavior:"smooth"});return}
  const j=e.target.closest("[data-jump]");if(j){jump(j.dataset.jump);return}
- const rm=e.target.closest("[data-rm]");if(rm){delete cart[rm.dataset.rm];save();drawCart();return}
+ const rm=e.target.closest("[data-rm]");if(rm){delete cart[rm.dataset.rm];save();return}
  const b=e.target.closest("button[data-d]");if(b){const k=b.dataset.k,s=SKU[k];cart[k]=(cart[k]||0)+ +b.dataset.d;if(cart[k]<=0)delete cart[k];if(cart[k]>99)cart[k]=99;save();
-  if(view==="shop"){redrawRow(s.c.id+"|"+s.name);if(+b.dataset.d>0&&cart[k]===1)toast("Added: "+lineName(s))}else drawCart();return}
- if(e.target.closest("[data-pickloc]")){closePanel();$("collect").scrollIntoView({behavior:"smooth"});return}
- if(e.target.closest("#send"))send();
+  if(view==="shop"){redrawRow(s.c.id+"|"+s.name);if(+b.dataset.d>0&&cart[k]===1)toast("Added: "+lineName(s))}return}
+ if(e.target.closest("#wasend"))send();
 });
 $("pc").addEventListener("change",e=>{if(!e.target.classList.contains("sel"))return;const key=e.target.closest(".item").dataset.key;pick[key]=e.target.value;redrawRow(key)});
 $("q").value=form.q||"";$("pk").innerHTML=pickerHTML();
 $("q").addEventListener("input",e=>{form.q=e.target.value;$("pk").innerHTML=pickerHTML()});
-$("pc").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
-$("collect").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b)return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q="";$("q").value=""}localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML()});
+$("sendbox").addEventListener("input",e=>{const f=e.target;if($("err"))$("err").textContent="";if(f.id==="phn")form.ph=f.value;else if(f.id)form[f.id]=f.value;localStorage.setItem("fp-form",JSON.stringify(form))});
+$("collect").addEventListener("click",e=>{const b=e.target.closest("[data-route],[data-s]");if(!b)return;if(b.dataset.route){if(form.r!==+b.dataset.route)form.s=null;form.r=+b.dataset.route}else{form.r=+b.dataset.r;form.s=+b.dataset.s;form.q="";$("q").value=""}localStorage.setItem("fp-form",JSON.stringify(form));$("pk").innerHTML=pickerHTML();drawSend()});
 $("pc").addEventListener("scroll",()=>requestAnimationFrame(activeChip),{passive:true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel()});
-$("burger").onclick=()=>$("links").classList.toggle("open");
-$("links").addEventListener("click",e=>{if(e.target.closest("a"))$("links").classList.remove("open")});
-const nav=$("nav");const onScroll=()=>nav.classList.toggle("solid",scrollY>40||$("links").classList.contains("open"));addEventListener("scroll",onScroll,{passive:true});$("burger").addEventListener("click",onScroll);onScroll();
 
 function buildMessage(){
  const{L,total}=totals();
@@ -425,10 +401,8 @@ function send(){const err=validate();$("err").textContent=err;if(err){$("err").s
 let tt;function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1600)}
 
 const local="0"+SHOP.wa.slice(2);$("waNum").textContent="+27 "+SHOP.wa.slice(2).replace(/(\d{2})(\d{3})(\d{4})/,"$1 $2 $3");
-$("waChat").href="https://wa.me/"+SHOP.wa+"?text="+encodeURIComponent("Hi "+SHOP.name+", I have a question about an order.");
-$("mCall").href="tel:+"+SHOP.wa;
 $("yr").textContent=new Date().getFullYear();
-drawFoot();
+drawFoot();drawSend();
 </script>
 </body>
 </html>
